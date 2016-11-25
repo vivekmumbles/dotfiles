@@ -23,18 +23,18 @@
   (package-initialize))
 
 (load-theme 'gruvbox t)
-; (load-theme 'base16-tomorrow-dark t)
+					; (load-theme 'base16-tomorrow-dark t)
 
 (require 'multiple-cursors)
 
 (defun comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
-        (if (region-active-p)
-            (setq beg (region-beginning) end (region-end))
-            (setq beg (line-beginning-position) end (line-end-position)))
-        (comment-or-uncomment-region beg end)))
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-or-uncomment-region beg end)))
 
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
 
@@ -42,7 +42,11 @@
 
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(global-set-key (kbd "M-2") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-1") 'mc/mark-previous-like-this)
+
 
 (setq c-default-style "linux"
       c-basic-offset 4)
@@ -132,4 +136,13 @@
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/hindent-20151113.24")
 ;; (require 'hindent)
 ;; (add-hook 'haskell-mode-hook #'hindent-mode)
+
+
+(when (boundp window-system)
+  (set-face-background 'region "white"))
+
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
